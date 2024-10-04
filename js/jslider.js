@@ -1,4 +1,5 @@
 
+
 document.addEventListener("DOMContentLoaded", function() {
     const items = document.querySelectorAll(".carousel-item");
     const video = document.getElementById("carousel-video");
@@ -60,37 +61,81 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.addEventListener('DOMContentLoaded', function() {
         var audio = document.getElementById('backgroundMusic');
-        var startTime = 21; // Segundo por defecto si no se ha guardado un tiempo anterior
-
+        var startTime = 21; // Segundo por defecto
+    
         // Recuperar el tiempo guardado del localStorage si existe
         if (localStorage.getItem('audioCurrentTime')) {
             startTime = parseFloat(localStorage.getItem('audioCurrentTime'));
         }
         audio.currentTime = startTime;
-
-        // Detección de compatibilidad para reproducir automáticamente sin interacción
-        function attemptPlayAudio() {
+    
+        // Crear un botón dinámicamente
+        var playButton = document.createElement('button');
+        playButton.textContent = '¡Presióname!';
+        playButton.style.position = 'absolute';
+        playButton.style.top = '20px'; // Colocado al principio de la página
+        playButton.style.left = '50%';
+        playButton.style.transform = 'translateX(-50%)';
+        playButton.style.padding = '15px';
+        playButton.style.width = '280px';
+        playButton.style.height = '280px';
+        playButton.style.borderRadius = '50%'; // Hacer el botón redondo
+        playButton.style.backgroundColor = '#BF6CFC'; // Verde amigable
+        playButton.style.color = 'white'; 
+        playButton.style.marginTop = '170px'; 
+        playButton.style.fontSize = '16px';
+        playButton.style.border = 'none';
+        playButton.style.cursor = 'pointer';
+        playButton.style.boxShadow = '0px 4px 6px rgba(0, 0, 0, 0.1)';
+        playButton.style.zIndex = '1000';  // Asegurarse de que esté por encima de otros elementos
+        playButton.style.transition = 'all 0.3s ease'; // Animación suave al interactuar
+    
+        // Agregar la animación al botón (cambio de tamaño y color para llamar la atención)
+        playButton.style.animation = 'pulse 2s infinite'; // Animación infinita cada 2 segundos
+    
+        // Estilo para el hover (cuando el usuario pasa el mouse sobre el botón)
+        playButton.addEventListener('mouseover', function() {
+            playButton.style.backgroundColor = '#BF6CFC'; // Cambia a un verde más oscuro al pasar el mouse
+        });
+        
+        playButton.addEventListener('mouseout', function() {
+            playButton.style.backgroundColor = '#4CAF50'; // Vuelve al color original
+        });
+    
+        document.body.appendChild(playButton); // Agregar el botón al body
+    
+        // Reproducir música al hacer clic en el botón
+        playButton.addEventListener('click', function() {
             audio.play().then(function() {
-                // Reproducción automática exitosa; quitar mute después de 1 segundo
-                setTimeout(function() {
-                    audio.muted = false; // Quitar mute
-                    console.log("Música de fondo reproduciéndose sin interacción.");
-                }, 1000); // Retraso para evitar restricciones
+                audio.muted = false; // Quitar mute después de la reproducción
+                playButton.style.display = 'none'; // Ocultar el botón después de hacer clic
             }).catch(function(error) {
-                console.log("Reproducción automática bloqueada: " + error);
+                console.log("Error en la reproducción automática: " + error);
             });
-        }
-
+        });
+    
         // Guardar el tiempo de reproducción en localStorage cada 5 segundos
         setInterval(function() {
             localStorage.setItem('audioCurrentTime', audio.currentTime);
-        }, 5000); // Actualiza cada 5 segundos
-
-        // Intentar reproducir automáticamente al cargar
-        attemptPlayAudio();
-
-        // Si es bloqueado, volver a intentar tras una interacción
-        document.addEventListener('click', attemptPlayAudio, { once: true });
-        document.addEventListener('scroll', attemptPlayAudio, { once: true });
-        document.addEventListener('touchstart', attemptPlayAudio, { once: true });
+        }, 5000);
+    
+        // Definir la animación @keyframes en el estilo
+        var style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes pulse {
+                0% {
+                    transform: translateX(-50%) scale(1);
+                    background-color: #BF6CFC;
+                }
+                50% {
+                    transform: translateX(-50%) scale(1.2);
+                    background-color: #76c7c0; /* Cambio de color a un verde más claro */
+                }
+                100% {
+                    transform: translateX(-50%) scale(1);
+                    background-color: #BF6CFC;
+                }
+            }
+        `;
+        document.head.appendChild(style); // Agregar el estilo de animación al documento
     });
