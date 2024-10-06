@@ -1,12 +1,18 @@
-
-
 document.addEventListener("DOMContentLoaded", function() {
     const items = document.querySelectorAll(".carousel-item");
     const video = document.getElementById("carousel-video");
     let currentIndex = 0;
     let transitionDuration = 1000; // 0.5 segundos de transición
     let imageDuration = 3000; // 2 segundos para cada imagen
-    let videoDuration = 5000; // 5 segundos para el video
+    let videoDuration = 5550; // 5 segundos para el video
+
+    // Deshabilita el clic derecho en el video
+    video.oncontextmenu = function() {
+        return false;
+    };
+
+    // Deshabilita los controles del video
+    video.removeAttribute("controls");
 
     function nextItem() {
         items[currentIndex].classList.remove("active");
