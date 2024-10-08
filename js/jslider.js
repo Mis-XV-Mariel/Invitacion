@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let currentIndex = 0;
     let transitionDuration = 1000; // 0.5 segundos de transición
     let imageDuration = 3000; // 2 segundos para cada imagen
-    let videoDuration = 5550; // 5 segundos para el video
+    let videoDuration = 0000; // 5 segundos para el video
 
     // Deshabilita el clic derecho en el video
     video.oncontextmenu = function() {
