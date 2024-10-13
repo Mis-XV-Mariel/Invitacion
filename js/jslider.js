@@ -1,69 +1,50 @@
-document.addEventListener("DOMContentLoaded", function() {
+ddocument.addEventListener("DOMContentLoaded", function() {
     const items = document.querySelectorAll(".carousel-item");
-    const video = document.getElementById("carousel-video");
     let currentIndex = 0;
-    let transitionDuration = 1000; // 0.5 segundos de transición
-    let imageDuration = 3000; // 2 segundos para cada imagen
-    let videoDuration = 0000; // 5 segundos para el video
-
-    // Deshabilita el clic derecho en el video
-    video.oncontextmenu = function() {
-        return false;
-    };
-
-    // Deshabilita los controles del video
-    video.removeAttribute("controls");
+    let imageDuration = 3000; // 3 segundos para cada imagen
+    let transitionDuration = 500; // 0.5 segundos de transición
 
     function nextItem() {
-        items[currentIndex].classList.remove("active");
+      // Elimina la clase active del elemento actual
+      items[currentIndex].classList.remove("active");
 
-        // Incrementamos el índice y lo reiniciamos si es necesario
-        currentIndex = (currentIndex + 1) % items.length;
+      // Incrementa el índice y lo reinicia si es necesario
+      currentIndex = (currentIndex + 1) % items.length;
 
-        items[currentIndex].classList.add("active");
-
-        // Si el siguiente elemento es el video, usamos su duración
-        if (items[currentIndex].querySelector("video")) {
-            video.play();
-            setTimeout(nextItem, videoDuration);
-        } else {
-            video.pause(); // Pausa el video cuando se cambian las imágenes
-            setTimeout(nextItem, imageDuration);
-        }
+      // Añade la clase active al siguiente elemento
+      items[currentIndex].classList.add("active");
     }
 
-    // Comienza el carrusel
-    setTimeout(nextItem, videoDuration);
-});
+    // Cambia la imagen cada 3.5 segundos (3 segundos + 0.5 segundos de transición)
+    setInterval(nextItem, imageDuration + transitionDuration);
+  });
+
+  const cuentaRegresivaFecha = new Date("November 30, 2024 00:00:00").getTime();
+
+  const temporizador = setInterval(() => {
+      const ahora = new Date().getTime();
+      const distancia = cuentaRegresivaFecha - ahora;
+  
+      const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+  
+      document.getElementById("dias").innerText = dias.toString().padStart(2, '0');
+      document.getElementById("horas").innerText = horas.toString().padStart(2, '0');
+      document.getElementById("minutos").innerText = minutos.toString().padStart(2, '0');
+      document.getElementById("segundos").innerText = segundos.toString().padStart(2, '0');
+  
+      if (distancia < 0) {
+          clearInterval(temporizador);
+          document.querySelector('.temporizador').innerHTML = "¡Tiempo Agotado!";
+      }
+  }, 1000);
 
 
-     const cuentaRegresivaFecha = new Date("November 30, 2024 00:00:00").getTime();
-
-     const temporizador = setInterval(() => {
-         const ahora = new Date().getTime();
-         const distancia = cuentaRegresivaFecha - ahora;
-     
-         const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
-         const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-         const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
-         const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
-     
-         document.getElementById("dias").innerText = dias.toString().padStart(2, '0');
-         document.getElementById("horas").innerText = horas.toString().padStart(2, '0');
-         document.getElementById("minutos").innerText = minutos.toString().padStart(2, '0');
-         document.getElementById("segundos").innerText = segundos.toString().padStart(2, '0');
-     
-         if (distancia < 0) {
-             clearInterval(temporizador);
-             document.querySelector('.temporizador').innerHTML = "¡Tiempo Agotado!";
-         }
-     }, 1000);
-
-
-     document.addEventListener('copy', function(e) {
-        e.preventDefault();
-    });
-
+  document.addEventListener('copy', function(e) {
+     e.preventDefault();
+ });
 
     document.addEventListener('DOMContentLoaded', function() {
         var audio = document.getElementById('backgroundMusic');
