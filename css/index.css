@@ -57,7 +57,7 @@
         justify-content: center;
         align-items: center;
     }
-    
+
     .portada {
         height: 100%;
         width: 100%;
@@ -86,21 +86,12 @@
             text-align: center;
         }
 
-        #slider {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 60rem;
-            align-self: center;
-          }
-      
-          .carousel {
+        .carousel {
             position: relative;
-            width: 88%;
-            height: 55rem;
+            width: 85%;
+            height: 52rem;
             overflow: hidden;
-            margin-top: 3rem;
+            margin-top: 5rem;
             border-radius: 1.2rem;
         }
 
@@ -118,16 +109,26 @@
             opacity: 1;
         }
 
-          img{
-              object-fit: cover;
-          }
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
         .info{
             width: 90%;
             display: flex;
             flex-direction: column;
             background-color: #fff;
             border-radius: 1.2rem;
-            margin-top: 3rem;
+            margin-top: 5rem;
         }
 
         .info2{
@@ -274,7 +275,7 @@
                 border: 0.2rem solid #495057;
                 background: #495057;
               }
-              
+
               .botonoes a:hover {
                 background: #fff;
                 color: #495057
@@ -291,18 +292,18 @@
                 margin-top: 3rem;
                 margin-bottom: 3rem;
             }
-            
+
             .tiempo {
                 margin: 0 1.5rem;
                 text-align: center;
             }
-            
+
             .tiempo span {
                 font-size: 2rem;
                 font-weight: bold;
                 color: #333;
             }
-            
+
             .unidad {
                 font-size: 0.75rem;
                 color: #666;
@@ -313,16 +314,16 @@
                 padding: 10px;
                 background-color: #f1f1f1;
             }
-            
+
             .footer p {
                 margin: 5px 0;
             }
-            
+
             .footer a {
                 color: #007BFF; /* Color del enlace */
                 text-decoration: none;
             }
-            
+
             .footer a:hover {
                 text-decoration: underline;
             }
@@ -393,5 +394,5 @@
                 -ms-user-select: none;     /* Internet Explorer/Edge */
                 user-select: none;         /* Non-prefixed version, currently supported by Chrome, Opera, and Edge */
             }
-            
+
         }
